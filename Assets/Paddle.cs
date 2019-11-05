@@ -11,7 +11,7 @@ public class Paddle : MonoBehaviour
 
     public LayerMask PaddleLayer;
 
-    [Tooltip("Max angle of paddle collider change when hitting the very end of the paddle")]
+    [Tooltip("Max angle of paddle collider change when hitting the very end of the paddle.")]
     [Range(1, 90)]
     public float AngularChange = 45;
 
@@ -37,6 +37,8 @@ public class Paddle : MonoBehaviour
 
         if (hit)
         {
+            PaddleCollider.SetActive(true);
+
             // Reset our paddle collider so it is flat and at position of paddle
             PaddleCollider.transform.rotation = new Quaternion();
             PaddleCollider.transform.position = transform.position;
@@ -78,7 +80,10 @@ public class Paddle : MonoBehaviour
             // Rotate around hit point with angle adjusted by above percent
             PaddleCollider.transform.RotateAround(hitPoint, Vector3.forward, computedAngularChange);
 
-
+        }
+        else
+        {
+            PaddleCollider.SetActive(false);
         }
     }
 }
